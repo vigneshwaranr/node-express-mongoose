@@ -11,7 +11,7 @@ var cookieParser = require('cookie-parser');
 var cookieSession = require('cookie-session');
 var bodyParser = require('body-parser');
 var methodOverride = require('method-override');
-var csrf = require('csurf');
+//var csrf = require('csurf');
 
 var mongoStore = require('connect-mongo')(session);
 var flash = require('connect-flash');
@@ -27,7 +27,7 @@ var env = process.env.NODE_ENV || 'development';
  * Expose
  */
 
-module.exports = function (app, passport) {
+module.exports = function (app/*, passport*/) {
 
   // Compression middleware (should be placed before express.static)
   app.use(compression({
@@ -95,8 +95,8 @@ module.exports = function (app, passport) {
   }));
 
   // use passport session
-  app.use(passport.initialize());
-  app.use(passport.session());
+  //app.use(passport.initialize());
+  //app.use(passport.session());
 
   // connect flash for flash messages - should be declared after sessions
   app.use(flash());
@@ -105,7 +105,7 @@ module.exports = function (app, passport) {
   app.use(helpers(pkg.name));
 
   // adds CSRF support
-  if (process.env.NODE_ENV !== 'test') {
+  /*if (process.env.NODE_ENV !== 'test') {
     app.use(csrf());
 
     // This could be moved to view-helpers :-)
@@ -113,5 +113,5 @@ module.exports = function (app, passport) {
       res.locals.csrf_token = req.csrfToken();
       next();
     });
-  }
+  }*/
 };

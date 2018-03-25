@@ -25,24 +25,15 @@ const port = process.env.PORT || 3000;
 const app = express();
 const connection = connect();
 
-/**
- * Expose
- */
-
-module.exports = {
-  app,
-  connection
-};
-
 // Bootstrap models
 fs.readdirSync(models)
   .filter(file => ~file.indexOf('.js'))
   .forEach(file => require(join(models, file)));
 
 // Bootstrap routes
-require('./config/passport')(passport);
-require('./config/express')(app, passport);
-require('./config/routes')(app, passport);
+//require('./config/passport')(passport);
+require('./config/express')(app);
+require('./config/routes')(app);
 
 connection
   .on('error', console.log)
@@ -60,3 +51,13 @@ function connect () {
   var connection = mongoose.connect(config.db, options).connection;
   return connection;
 }
+
+
+/**
+ * Expose
+ */
+
+module.exports = {
+  app,
+  connection
+};

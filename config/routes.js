@@ -5,14 +5,24 @@
  */
 
 const home = require('../app/controllers/home');
+const bookings = require('../app/controllers/bookings');
 
 /**
  * Expose
  */
 
-module.exports = function (app, passport) {
+module.exports = function (app/*, passport*/) {
 
   app.get('/', home.index);
+
+  app.get('/bookings', bookings.index);
+  app.post('/bookings', bookings.create);
+  app.del('/bookings/:id', bookings.destroy);
+
+
+
+
+
 
   /**
    * Error handling
